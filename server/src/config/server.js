@@ -44,4 +44,6 @@ mongoose.connect(bd, { useNewUrlParser: true })
 
 app.use('/api/anuncio', anuncio)
 
+require('../routes/api/auth')(app)
+
 module.exports = app
