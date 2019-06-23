@@ -14,7 +14,7 @@ const UsuarioSchema = new Schema({
     unique: true,
     lowercase: true
   },
-  password: {
+  senha: {
     type: String,
     required: true,
     select: false
@@ -26,8 +26,8 @@ const UsuarioSchema = new Schema({
 })
 
 UsuarioSchema.pre('save', async function(next){
-  const hash = await bcrypt.hash(this.password, 10)
-  this.password = hash
+  const hash = await bcrypt.hash(this.senha, 10)
+  this.senha = hash
 
   next()
 })
