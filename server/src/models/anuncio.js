@@ -18,7 +18,15 @@ const AnuncioSchema = new Schema({
     type: String,
     required: true
   },
-  imagem: String,
+  nomeIMG: {
+    type: String,
+    default: "none",
+    required: true
+  },
+  dadosIMG: {
+    type: String,
+    required: true
+  },
   categoria: {
     type: String,
     required: true
