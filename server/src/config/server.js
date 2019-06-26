@@ -2,9 +2,12 @@ var express = require('express')
 var bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 // const path = require('path')
+const cors = require('cors')
 
 var app = express()
 var anuncio = require('../routes/api/anuncio')
+
+app.use(cors())
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -12,7 +15,7 @@ app.use(function (req, res, next) {
   var allowedOrigins = ['https://enc-it.firebaseapp.com', 'http://localhost:3000']
   var origin = req.headers.origin
   if(allowedOrigins.indexOf(origin) > -1){
-    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
 
   // Website you wish to allow to connect
@@ -22,7 +25,7 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS, PUT, PATCH, DELETE');
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept");
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)

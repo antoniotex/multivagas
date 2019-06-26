@@ -56,7 +56,6 @@ router.get('/:id', function(req, res){
 router.post('/', upload.single('imageData'), function(req, res){
   // if (!req.file) return res.send('Please upload a file')
   // console.log('req.file', req.file)
-  console.log('req.body', req.body)
   const novoItem = new Anuncio({
     usuario: {id: 'jhd7ehdbY7&', nome: req.body.nome},
     titulo: req.body.titulo,
