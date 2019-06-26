@@ -1,10 +1,10 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import { isAuthenticated } from "./services/auth";
 import SignUp from './pages/sign-up';
 import SignIn from "./pages/sign-in";
-import { logout } from "./services/auth";
+import Home from './pages/home/home.js'
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -13,7 +13,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       isAuthenticated() ? (
         <Component {...props} />
       ) : (
-        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
       )
     }
   />
@@ -22,9 +22,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={SignIn} />
+      <Route exact path="/login" component={SignIn} />
       <Route path="/signup" component={SignUp} />
-      <PrivateRoute path="/app" component={() => <section><h1>App</h1><Link to='/' onClick={ logout }>Sair</Link></section>} />
+      <PrivateRoute path="/" component={Home} />
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   </BrowserRouter>

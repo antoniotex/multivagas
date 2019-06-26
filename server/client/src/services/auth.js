@@ -5,6 +5,5 @@ export const login = token => {
   localStorage.setItem(TOKEN_KEY, token);
 };
 export const logout = () => {
-  console.log('saindooo')
   localStorage.removeItem(TOKEN_KEY);
 };

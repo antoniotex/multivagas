@@ -22,11 +22,9 @@ class SignIn extends Component {
     } else {
       try {
         const response = await api.post("/auth/authenticate", { email, senha })
-        console.log(response)
         login(response.data.token);
-        this.props.history.push("/app");
+        this.props.history.push("/");
       } catch (err) {
-        console.log('Erro: ', err.response.data)
         this.setState({
           error:
             err.response.data.erro
