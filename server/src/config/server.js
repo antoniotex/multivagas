@@ -7,6 +7,8 @@ const cors = require('cors')
 var app = express()
 var anuncio = require('../routes/api/anuncio')
 
+mongoose.set('useCreateIndex', true);
+
 app.use(cors())
 
 app.use(bodyParser.urlencoded({ extended: true }))
