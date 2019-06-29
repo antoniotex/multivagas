@@ -8,7 +8,7 @@ const router = express.Router()
 
 // router.use(authMiddleware)
 
-const Anuncio = require('../../models/anuncio')
+const Anuncios = require('../../models/anuncios')
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb){
@@ -39,12 +39,13 @@ const upload = multer({
 })
 
 router.get('/', function(req, res){
-  Anuncio.find()
+  console.log(req.body);
+  Anuncios.find()
    .then(dadosURL => res.json(dadosURL))
 })
 
-router.get('/:id', function(req, res){
-  Anuncio.findOne({ _id:  req.params.id}, (error, item) => {
+router.get('id/:id', function(req, res){
+  Anuncios.findOne({ _id:  req.params.id}, (error, item) => {
     if(error){
       res.json({erro: error})
       return
@@ -53,10 +54,25 @@ router.get('/:id', function(req, res){
   })
 })
 
+router.get('/busca', (req, res) => {
+  console.log(req.query)
+  const params = {}
+  if(req.query.termo){ params.termo = new RegExp(req.query.termo, 'i') }
+  if(req.query.categoria){ params.categoria = new RegExp(req.query.categoria, 'i') }
+  console.log(params)
+  Anuncios.find({ $or:[{ titulo: params.termo }, { descricao: params.termo }] }, (error, item) => {
+    if(error){
+      res.json({erro: error})
+      return
+    }
+    res.send(item)
+  })
+})
+
 router.post('/', upload.single('imageData'), function(req, res){
   // if (!req.file) return res.send('Please upload a file')
   // console.log('req.file', req.file)
-  const novoItem = new Anuncio({
+  const novoItem = new Anuncios({
     usuario: {id: 'jhd7ehdbY7&', nome: req.body.nome},
     titulo: req.body.titulo,
     descricao: req.body.descricao,
@@ -76,7 +92,7 @@ router.put('/:id', (req, res) => {
   if(!!req.body.bairro){
     updateObj = { localizacao: { CEP: req.body.CEP, cidade: req.body.cidade, bairro: req.body.bairro } }
   }
-  Anuncio.findOneAndUpdate({_id: req.params.id}, updateObj, {new: true}, (err, item) => {
+  Anuncios.findOneAndUpdate({_id: req.params.id}, updateObj, {new: true}, (err, item) => {
       if(err){
           res.send(err)
       }
@@ -85,7 +101,7 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  Anuncio.findById(req.params.id)
+  Anuncios.findById(req.params.id)
     .then(item => item.remove().then(() => res.json({ success: true })))
     .catch(err => res.status(404).json({ success: false }))
 })

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Routes from './routes';
-// import axios from 'axios'
+import axios from 'axios'
 // import defaultImg from './assets/default-img.jpg'
 
 class App extends Component{
@@ -36,13 +36,21 @@ class App extends Component{
   //   });
   // }
 
-  // componentWillMount (){
-  //   const teste = axios.get('/api/anuncio')
-  //   Promise.all([teste]).then(result => {
-  //     console.log(result[0].data)
-  //     this.setState({ anuncios: result[0].data })
-  //   })
-  // }
+  componentWillMount (){
+    const mock = {
+      termo: 'na'
+    }
+    const teste = axios.get('/api/anuncios/busca', { params: mock })
+    Promise.all([teste]).then(result => {
+      console.log(result[0].data)
+      result[0].data.map(item => {
+        console.log(item.titulo)
+        console.log(item.descricao)
+        console.log(item.categoria)
+      })
+      this.setState({ anuncios: result[0].data })
+    })
+  }
 
   // handleChange = (event) => {
   //   this.setState({[event.target.name]: event.target.value})

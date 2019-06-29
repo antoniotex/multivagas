@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const AnuncioSchema = new Schema({
+const AnunciosSchema = new Schema({
   usuario: {
     id: {
       type: String,
@@ -46,4 +46,4 @@ const AnuncioSchema = new Schema({
   },
 })
 
-module.exports = Anuncio = mongoose.model('anuncio', AnuncioSchema)
+module.exports = Anuncios = mongoose.model('anuncios', AnunciosSchema)

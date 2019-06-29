@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 var app = express()
-var anuncio = require('../routes/api/anuncio')
+var anuncios = require('../routes/api/anuncios')
 
 mongoose.set('useCreateIndex', true);
 
@@ -47,7 +47,7 @@ mongoose.connect(bd, { useNewUrlParser: true })
     console.log(erro)
   })
 
-app.use('/api/anuncio', anuncio)
+app.use('/api/anuncios', anuncios)
 
 require('../routes/api/auth')(app)
 
