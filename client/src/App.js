@@ -38,7 +38,9 @@ class App extends Component{
 
   componentWillMount (){
     const mock = {
-      termo: 'na'
+      termo: 'jardineiro',
+      categoria: 'serviços',
+
     }
     const teste = axios.get('/api/anuncios/busca', { params: mock })
     Promise.all([teste]).then(result => {

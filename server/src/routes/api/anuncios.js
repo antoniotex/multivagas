@@ -2,6 +2,8 @@
 const express = require('express')
 const path = require('path')
 const multer = require('multer')
+const uuid = require('uuid')
+const crypto = require('crypto')
 const authMiddleware = require('../../middlewares/auth')
 
 const router = express.Router()
@@ -55,12 +57,26 @@ router.get('id/:id', function(req, res){
 })
 
 router.get('/busca', (req, res) => {
-  console.log(req.query)
-  const params = {}
-  if(req.query.termo){ params.termo = new RegExp(req.query.termo, 'i') }
-  if(req.query.categoria){ params.categoria = new RegExp(req.query.categoria, 'i') }
-  console.log(params)
-  Anuncios.find({ $or:[{ titulo: params.termo }, { descricao: params.termo }] }, (error, item) => {
+  let params = {}
+  if(req.query.termo){
+    params = {
+      $or: []
+    }
+    params.$or.push({ titulo: new RegExp(req.query.termo, 'i') }, { descricao: new RegExp(req.query.termo, 'i') })
+  }
+  if(req.query.categoria){
+    params.categoria = req.query.categoria
+  }
+  if(req.query.cidade){
+    params.cidade = req.query.cidade
+  }
+  if(req.query.bairro){
+    params.bairro = req.query.bairro
+  }
+
+  console.log('PARAMS', params)
+
+  Anuncios.find(params, (error, item) => {
     if(error){
       res.json({erro: error})
       return
@@ -73,14 +89,18 @@ router.post('/', upload.single('imageData'), function(req, res){
   // if (!req.file) return res.send('Please upload a file')
   // console.log('req.file', req.file)
   const novoItem = new Anuncios({
-    usuario: {id: 'jhd7ehdbY7&', nome: req.body.nome},
+    idUsuario: uuid(),
+    nomeUsuario: req.body.nome,
+    id: crypto.randomBytes(3).toString('hex'),
     titulo: req.body.titulo,
     descricao: req.body.descricao,
     categoria: req.body.categoria,
     telefone: req.body.telefone,
-    localizacao: { CEP: req.body.CEP, cidade: req.body.cidade, bairro: req.body.bairro },
-    nomeIMG: req.body.nomeIMG,
-    dadosIMG: req.file.path
+    cep: req.body.cep,
+    cidade: req.body.cidade,
+    bairro: req.body.bairro,
+    nomeIMG: req.body.nomeIMG ? req.body.nomeIMG : 'none',
+    dadosIMG: req.file ? req.file.path : 'none'
   })
   novoItem.save().then(function(item){
     res.json(item)

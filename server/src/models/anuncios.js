@@ -3,12 +3,17 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const AnunciosSchema = new Schema({
-  usuario: {
-    id: {
-      type: String,
-      required: true
-    },
-    nome: String
+  idUsuario: {
+    type: String,
+    required: true
+  },
+  nomeUsuario: {
+    type: String,
+    required: true
+  },
+  id: {
+    type: String,
+    required: true
   },
   titulo: {
     type: String,
@@ -21,23 +26,27 @@ const AnunciosSchema = new Schema({
   nomeIMG: {
     type: String,
     default: "none",
-    required: true
+    // required: true
   },
   dadosIMG: {
     type: String,
-    required: true
+    // required: true
   },
   categoria: {
     type: String,
     required: true
   },
-  localizacao: {
-    CEP: {
-      type: Number,
-      required: true
-    },
-    cidade: String,
-    bairro: String
+  cep: {
+    type: Number,
+    required: true
+  },
+  cidade: {
+    type:String,
+    required: true
+  },
+  bairro: {
+    type:String,
+    required: true
   },
   telefone: Number,
   data: {
