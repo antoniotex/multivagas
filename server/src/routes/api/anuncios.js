@@ -90,7 +90,7 @@ router.post('/', upload.single('imageData'), function(req, res){
   // console.log('req.file', req.file)
   const novoItem = new Anuncios({
     idUsuario: uuid(),
-    nomeUsuario: req.body.nome,
+    nomeUsuario: req.body.nomeUsuario,
     id: crypto.randomBytes(3).toString('hex'),
     titulo: req.body.titulo,
     descricao: req.body.descricao,
@@ -109,10 +109,8 @@ router.post('/', upload.single('imageData'), function(req, res){
 
 router.put('/:id', (req, res) => {
   let updateObj = req.body
-  if(!!req.body.bairro){
-    updateObj = { localizacao: { CEP: req.body.CEP, cidade: req.body.cidade, bairro: req.body.bairro } }
-  }
-  Anuncios.findOneAndUpdate({_id: req.params.id}, updateObj, {new: true}, (err, item) => {
+  console.log(updateObj);
+  Anuncios.updateOne({_id: req.params.id}, updateObj, {new: true}, (err, item) => {
       if(err){
           res.send(err)
       }
