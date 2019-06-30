@@ -42,16 +42,16 @@ class App extends Component{
       categoria: 'serviços',
 
     }
-    const teste = axios.get('/api/anuncios/busca', { params: mock })
-    Promise.all([teste]).then(result => {
-      console.log(result[0].data)
-      result[0].data.map(item => {
-        console.log(item.titulo)
-        console.log(item.descricao)
-        console.log(item.categoria)
-      })
-      this.setState({ anuncios: result[0].data })
-    })
+    // const teste = axios.get('/api/anuncios/busca', { params: mock })
+    // Promise.all([teste]).then(result => {
+    //   console.log(result[0].data)
+    //   result[0].data.map(item => {
+    //     console.log(item.titulo)
+    //     console.log(item.descricao)
+    //     console.log(item.categoria)
+    //   })
+    //   this.setState({ anuncios: result[0].data })
+    // })
   }
 
   // handleChange = (event) => {

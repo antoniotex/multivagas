@@ -8,7 +8,7 @@ const authMiddleware = require('../../middlewares/auth')
 
 const router = express.Router()
 
-// router.use(authMiddleware)
+router.use(authMiddleware)
 
 const Anuncios = require('../../models/anuncios')
 
@@ -41,7 +41,6 @@ const upload = multer({
 })
 
 router.get('/', function(req, res){
-  console.log(req.body);
   Anuncios.find()
    .then(dadosURL => res.json(dadosURL))
 })
@@ -109,7 +108,6 @@ router.post('/', upload.single('imageData'), function(req, res){
 
 router.put('/:id', (req, res) => {
   let updateObj = req.body
-  console.log(updateObj);
   Anuncios.updateOne({_id: req.params.id}, updateObj, {new: true}, (err, item) => {
       if(err){
           res.send(err)

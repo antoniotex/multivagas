@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import api from '../../services/api'
+import './sign-up.css'
 
 // import Logo from "../../assets/airbnb-logo.svg";
 
@@ -32,30 +33,16 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSignUp}>
-          
+      <section className="form-cadastro">
+        <form onSubmit={this.handleSignUp} className="form-cadastro-wrapper">
+          <input type="text" placeholder="Nome de usuário" onChange={e => this.setState({ nome: e.target.value })}/>
+          <input type="email" placeholder="Endereço de e-mail" onChange={e => this.setState({ email: e.target.value })}/>
+          <input type="password" placeholder="Senha" onChange={e => this.setState({ senha: e.target.value })}/>
           {this.state.error && <p>{this.state.error}</p>}
-          <input
-            type="text"
-            placeholder="Nome de usuário"
-            onChange={e => this.setState({ nome: e.target.value })}
-          />
-          <input
-            type="email"
-            placeholder="Endereço de e-mail"
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <input
-            type="senha"
-            placeholder="Senha"
-            onChange={e => this.setState({ senha: e.target.value })}
-          />
           <button type="submit">Cadastrar grátis</button>
-          <hr />
           <Link to="/">Fazer login</Link>
         </form>
-      </div>
+      </section>
     );
   }
 }
