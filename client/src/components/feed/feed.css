@@ -1,0 +1,9 @@
+.feed-img img{
+  width: 150px;
+}
+.feed-info span{
+  font-weight: bold;
+}
+.feed-info p:last-child{
+  color: #999
+}

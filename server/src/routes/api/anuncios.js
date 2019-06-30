@@ -4,6 +4,7 @@ const path = require('path')
 const multer = require('multer')
 const uuid = require('uuid')
 const crypto = require('crypto')
+const fs = require('fs')
 const authMiddleware = require('../../middlewares/auth')
 
 const router = express.Router()
@@ -23,10 +24,8 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, cb) => {
   if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
-    console.log('acc')
     cb(null, true)
   }else{
-    console.log('rejeitou o file')
     // Rejeita o armazenamento
     cb(null, false)
   }
@@ -41,6 +40,7 @@ const upload = multer({
 })
 
 router.get('/', function(req, res){
+  console.log('entrei')
   Anuncios.find()
    .then(dadosURL => res.json(dadosURL))
 })
@@ -51,7 +51,8 @@ router.get('id/:id', function(req, res){
       res.json({erro: error})
       return
     }
-    res.json(item)
+    res.contentType('json')
+    res.send(item)
   })
 })
 
@@ -87,6 +88,8 @@ router.get('/busca', (req, res) => {
 router.post('/', upload.single('imageData'), function(req, res){
   // if (!req.file) return res.send('Please upload a file')
   // console.log('req.file', req.file)
+  console.log(req.body)
+  console.log(req.file);
   const novoItem = new Anuncios({
     idUsuario: uuid(),
     nomeUsuario: req.body.nomeUsuario,
@@ -97,10 +100,11 @@ router.post('/', upload.single('imageData'), function(req, res){
     telefone: req.body.telefone,
     cep: req.body.cep,
     cidade: req.body.cidade,
-    bairro: req.body.bairro,
-    nomeIMG: req.body.nomeIMG ? req.body.nomeIMG : 'none',
-    dadosIMG: req.file ? req.file.path : 'none'
+    bairro: req.body.bairro
   })
+  novoItem.dadosIMG.data = fs.readFileSync(req.file.path)
+  novoItem.dadosIMG.contentType = req.file.mimetype
+  console.log('novoItem', novoItem)
   novoItem.save().then(function(item){
     res.json(item)
   })

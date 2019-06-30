@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
 import Routes from './routes';
-import axios from 'axios'
-// import defaultImg from './assets/default-img.jpg'
+import defaultImg from './assets/default-img.jpg'
 
 class App extends Component{
-  // constructor(){
-  //   super()
-  //   this.state = {
-  //     anuncios: [],
-  //     nome: '',
-  //     titulo: '',
-  //     descricao: '',
-  //     categoria: '',
-  //     CEP: '',
-  //     multerImage: defaultImg,
-  //     dadosIMG: null
-  //   }
-  // }
+  constructor(){
+    super()
+    this.state = {
+      nome: '',
+      titulo: '',
+      descricao: '',
+      categoria: '',
+      CEP: '',
+      multerImage: defaultImg,
+      dadosIMG: null
+    }
+  }
 
   //   setDefaultImage() {
   //   this.setState({
@@ -35,14 +33,6 @@ class App extends Component{
   //     dadosIMG: imageFormObj
   //   });
   // }
-
-  componentWillMount(){
-    const teste = axios.get('/api/anuncios')
-    // Promise.all([teste]).then(result => {
-    //   console.table(result[0].data)
-    //   this.setState({ anuncios: result[0].data })
-    // })
-  }
 
   // handleChange = (event) => {
   //   this.setState({[event.target.name]: event.target.value})
@@ -76,43 +66,6 @@ class App extends Component{
     return (
       <Routes />
     )
-  //   if(this.state.anuncios.length >= 0){
-  //     return (
-  //       <div className="App">
-  //       <h1>Cadastro de Anuncio</h1>
-  //         <input type="file" placeholder="imagem" name="imagem" onChange={(e) => this.uploadImage(e, 'multer')}/>
-  //         <input type="text" placeholder="nome" name="nome" value={this.state.nome} onChange={this.handleChange}/>
-  //         <input type="text" placeholder="titulo" name="titulo" value={this.state.titulo} onChange={this.handleChange}/>
-  //         <input type="text" placeholder="descricao" name="descricao" value={this.state.descricao} onChange={this.handleChange}/>
-  //         <input type="text" placeholder="categoria" name="categoria" value={this.state.categoria} onChange={this.handleChange}/>
-  //         <input type="number" placeholder="CEP" name="CEP" value={this.state.CEP} onChange={this.handleChange} />
-  //         <button onClick={this.handleSubmit}>Cadastrar</button>
-  //         <img src={this.state.multerImage} alt="upload" className="prov-img" />
-  //         <h1>Anuncios</h1>
-  //         {
-  //           this.state.anuncios.map((item, index) => {
-  //           return (
-  //             <div className="card-anuncio" key={index}>
-  //               <div className="card-img">
-  //                 <img src={ item.dadosIMG } alt="Imagem incluida no anuncio" />
-  //               </div>
-  //               <div className="card-info">
-  //                 <span>{item.titulo}</span>
-  //                 <p>{item.descricao}</p>
-  //                 <p>{item.categoria}</p>
-  //                 <small>{item.usuario.nome}</small>
-  //               </div>
-  //             </div>
-  //           )
-  //         }) 
-  //       }
-  //       </div>
-  //     );
-  //   }else{
-  //     return (
-  //       <div className="App"><h1>Loading...</h1></div>
-  //     )
-  //   }
   }
 }
 

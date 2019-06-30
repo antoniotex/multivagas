@@ -4,6 +4,7 @@ import { logout } from "../../services/auth";
 import Header from '../../components/header/header'
 import MenuLateral from '../../components/menu-lateral/menu-lateral'
 import CadastroItem from '../../components/cadastro-item/cadastro-item'
+import Feed from '../../components/feed/feed'
 
 class Home extends Component {
   state = {};
@@ -16,7 +17,7 @@ class Home extends Component {
         <Switch>
           <Route path="/" exact component={ () => <h1>Home</h1> } />
           <Route path="/cadastro" component={ CadastroItem } />
-          <Route path="/feed" component={ () => <h1>Feed</h1> } />
+          <Route path="/feed" component={ () => <Feed/> } />
         </Switch>
       </section>
     );

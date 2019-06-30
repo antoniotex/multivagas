@@ -29,7 +29,7 @@ const AnunciosSchema = new Schema({
     // required: true
   },
   dadosIMG: {
-    type: String,
+    data: Buffer, contentType: String,
     // required: true
   },
   categoria: {
@@ -53,6 +53,8 @@ const AnunciosSchema = new Schema({
       type: Date,
       default: Date.now
   },
+}, {
+  timestamps: true
 })
 
 module.exports = Anuncios = mongoose.model('anuncios', AnunciosSchema)
