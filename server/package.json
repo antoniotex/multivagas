@@ -4,7 +4,9 @@
   "description": "Portal Nacional de Serviços",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false"
   },
   "author": "Antonio Carlos Teixeira",
   "license": "MIT",

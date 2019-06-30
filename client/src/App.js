@@ -36,20 +36,10 @@ class App extends Component{
   //   });
   // }
 
-  componentWillMount (){
-    const mock = {
-      termo: 'jardineiro',
-      categoria: 'serviços',
-
-    }
-    // const teste = axios.get('/api/anuncios/busca', { params: mock })
+  componentWillMount(){
+    const teste = axios.get('/api/anuncios')
     // Promise.all([teste]).then(result => {
-    //   console.log(result[0].data)
-    //   result[0].data.map(item => {
-    //     console.log(item.titulo)
-    //     console.log(item.descricao)
-    //     console.log(item.categoria)
-    //   })
+    //   console.table(result[0].data)
     //   this.setState({ anuncios: result[0].data })
     // })
   }

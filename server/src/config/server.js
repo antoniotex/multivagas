@@ -14,7 +14,7 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(function (req, res, next) {
-  var allowedOrigins = ['https://enc-it.firebaseapp.com', 'http://localhost:3000']
+  var allowedOrigins = ['https://easy-uerj.herokuapp.com', 'http://localhost:3000']
   var origin = req.headers.origin
   if(allowedOrigins.indexOf(origin) > -1){
     res.setHeader('Access-Control-Allow-Origin', '*');
