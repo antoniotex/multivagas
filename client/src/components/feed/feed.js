@@ -20,19 +20,6 @@ class Feed extends Component {
       })
       await this.setState({ anuncios: result.data })
     })
-
-    // const teste = api.get('/api/anuncios')
-    // let images = []
-    // Promise.all([teste]).then(result => {
-    //   result[0].data.map(item => {
-    //     const base64Flag = `data:${item.dadosIMG.contentType}:base64,`
-    //     const imageStr = this.arrayBufferToBase64(item.dadosIMG.data.data)
-    //     item.dadosIMG = base64Flag + imageStr
-    //     images.push(item.dadosIMG)
-    //   })
-    //   this.setState({ anuncios: result[0].data, imagens: images[0] }, () => console.log(images))
-    // })
-    // .catch(error => console.log('Erro app.js', error.response.data))
   }
 
   arrayBufferToBase64(buffer) {
