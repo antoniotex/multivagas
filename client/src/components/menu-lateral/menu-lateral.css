@@ -9,6 +9,7 @@
   transition: 1s;
   z-index: 2;
   top: 0;
+  border-right: 2px solid indigo;
 }
 .menu-lateral{
   height: 300px;
@@ -25,8 +26,11 @@
   list-style: none;
   padding: 20px 10px;
   border-radius: 15px;
+  background: rgba(0, 0, 0, .2);
+  margin: 10px auto;
+  width: 85%;
 }
-.menu-lateral ul li a{
+.menu-lateral ul a{
   list-style: none;
   color: #fff;
   text-decoration: none;

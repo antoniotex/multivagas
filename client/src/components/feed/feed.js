@@ -40,7 +40,7 @@ class Feed extends Component {
       return (
         <section className="feed">
 
-          <h1>Anuncios</h1>
+          <h1>Feed de Anúncios</h1>
           {
             this.state.anuncios.map((item, index) => {
             return (
@@ -50,7 +50,7 @@ class Feed extends Component {
                 </div>
                 <div className="feed-info">
                   <span>{item.titulo}</span>
-                  <p>{item.descricao}</p>
+                  <p>{ item.bairro }, { item.cidade }</p>
                   <p>{item.categoria}</p>
                 </div>
               </div>

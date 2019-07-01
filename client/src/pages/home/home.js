@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter, Switch, Route } from "react-router-dom";
 import { logout } from "../../services/auth";
+import './home.css'
 import Header from '../../components/header/header'
 import MenuLateral from '../../components/menu-lateral/menu-lateral'
 import CadastroItem from '../../components/cadastro-item/cadastro-item'
@@ -11,7 +12,7 @@ class Home extends Component {
 
   render() {
     return (
-      <section>
+      <section className="home">
         <MenuLateral/>
         <Header />
         <Switch>

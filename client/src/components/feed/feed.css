@@ -1,13 +1,41 @@
 section.feed{
   /* border: 1px solid red; */
   margin-top: 68px;
+  padding: 0 10px;
+}
+.feed h1{
+  color: #eee;
+  text-align: center;
+  font-size: 1.5em;
+}
+.feed-anuncio{
+  border-radius: 15px;
+  background-color: #eee;
+  display: flex;
+  flex-wrap: nowrap;
+  height: 150px;
+  margin: 15px 0;
+}
+.feed-img{
+  width: 40%;
+}
+.feed-info{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
 }
 .feed-img img{
-  width: 150px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px 0 0 15px;
 }
 .feed-info span{
   font-weight: bold;
 }
 .feed-info p:last-child{
-  color: #999
+  color: #999;
+  margin: 0;
 }
