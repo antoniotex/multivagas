@@ -11,10 +11,10 @@ class CadastroItem extends Component {
     titulo: '',
     descricao: '',
     categoria: '',
-    cep: null,
+    cep: '',
     cidade: '',
     bairro: '',
-    telefone: null,
+    telefone: '',
     multerImage: defaultImg,
     dadosIMG: null
   }
@@ -26,6 +26,7 @@ class CadastroItem extends Component {
   }
 
   uploadImage(e, method) {
+      debugger
       e.preventDefault()
       let imageFormObj = new FormData();
       imageFormObj.append("imageName", "multer-image-" + Date.now());
@@ -72,7 +73,6 @@ class CadastroItem extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <section className="cadastro-item-wrapper">
         <div className="cadastro-item">

@@ -19,6 +19,7 @@ class MenuLateral extends Component {
     return (
       <section className={`menu-lateral-wrapper ${this.state.menuOpen ? 'menu-open' : ''}`} onClick={this.toggleMenu}>
         <div className="menu-lateral">
+        <span onClick={this.toggleMenu} className={this.state.menuOpen ? 'rotate-hamburguer hamburguer-open' : ''}></span>
           <ul className="menu">
             <li><Link to="/feed">Feed</Link></li>
             <li><Link to="/cadastro">Cadastrar Serviço</Link></li>
@@ -27,9 +28,6 @@ class MenuLateral extends Component {
             <li>FAQ</li>
             <li><Link to="/" onClick={ logout }>Sair</Link></li>
           </ul>
-        </div>
-        <div className={`menu-toggle-button ${this.state.menuOpen ? 'menu-toggle-button-open' : ''}`}>
-          <span onClick={this.toggleMenu} className={this.state.menuOpen ? 'rotate-hamburguer hamburguer-open' : ''}></span>
         </div>
       </section>
     );

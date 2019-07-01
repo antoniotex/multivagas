@@ -3,6 +3,10 @@
   justify-content: center;
   align-items: center;
   background: indigo;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
 }
 .header h1{
   margin: 20px 10px;
