@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { logout } from '../../services/auth';
+import { withRouter } from "react-router-dom";
 import './header.css'
+import { getName } from "../../services/auth";
 
 class Header extends Component {
   state = {};
@@ -11,7 +11,7 @@ class Header extends Component {
     return (
       <section className="header">
         <h1>Easy</h1>
-        <img src={ imagemLogin } />
+        <img src={ imagemLogin } alt="" onClick={() => alert(`Olá ${getName()}, fique a vontade!`)} />
       </section>
     );
   }

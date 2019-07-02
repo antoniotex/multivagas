@@ -1,0 +1,81 @@
+.anuncio{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.anuncio-img{
+  width: 100%;
+  height: 400px;
+  position: relative;
+}
+.anuncio-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.anuncio-img img:nth-child(1){
+  transform-origin: center;
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  top: 10%;
+  left: 2%;
+  background: rgba(0, 0, 0, .5);
+  padding: 15px;
+  border-radius: 50%; 
+}
+.anuncio-info{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+.anuncio-info span{
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.anuncio-info small{
+  font-size: 1em;
+  color: #666;
+}
+.anuncio-info p{
+  font-size: 1.1em;
+  color: #fff;
+}
+hr{
+  color: indigo;
+  width: calc(100% - 20px);
+  background: indigo;
+  height: 1px;
+  border: none;
+  margin: 0;
+}
+.anuncio-dados{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #fff;
+  /* border: 2px solid red; */
+}
+.anuncio-dados h3, .anuncio-dados p, .anuncio-localizacao h3, .anuncio-localizacao p{
+  padding-left: 10px;
+  margin: 10px;
+}
+.anuncio-dados p, .anuncio-localizacao p{
+  font-size: 1.1em;
+}
+.anuncio-dados h3, .anuncio-localizacao h3{
+  font-size: 1.4em;
+}
+.anuncio-localizacao{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: #fff;
+  /* border: 2px solid red; */
+}

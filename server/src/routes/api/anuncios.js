@@ -45,8 +45,9 @@ router.get('/', function(req, res){
    .then(dadosURL => res.json(dadosURL))
 })
 
-router.get('id/:id', function(req, res){
-  Anuncios.findOne({ _id:  req.params.id}, (error, item) => {
+router.get('/id/:id', function(req, res){
+  console.log(req.params)
+  Anuncios.findOne({ id:  req.params.id}, (error, item) => {
     if(error){
       res.json({erro: error})
       return
@@ -58,6 +59,7 @@ router.get('id/:id', function(req, res){
 
 router.get('/busca', (req, res) => {
   let params = {}
+  console.log('query', req.query)
   if(req.query.termo){
     params = {
       $or: []
@@ -112,7 +114,7 @@ router.post('/', upload.single('imageData'), function(req, res){
 
 router.put('/:id', (req, res) => {
   let updateObj = req.body
-  Anuncios.updateOne({_id: req.params.id}, updateObj, {new: true}, (err, item) => {
+  Anuncios.updateOne({id: req.params.id}, updateObj, {new: true}, (err, item) => {
       if(err){
           res.send(err)
       }

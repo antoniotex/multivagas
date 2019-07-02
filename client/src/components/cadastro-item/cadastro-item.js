@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import api from '../../services/api'
 import './cadastro-item.css'
 import defaultImg from '../../assets/default-img.jpg'
@@ -102,7 +102,7 @@ class CadastroItem extends Component {
     }else{
       return (
         <section className="cadastro-item-wrapper-loading">
-          <img src={ loadingImg } />
+          <img src={ loadingImg } alt="" />
         </section>
       )
     }

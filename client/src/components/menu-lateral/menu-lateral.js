@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { logout } from "../../services/auth";
-import Header from '../../components/header/header'
 import './menu-lateral.css'
 
 class MenuLateral extends Component {
@@ -21,6 +20,7 @@ class MenuLateral extends Component {
         <div className="menu-lateral">
         <span onClick={this.toggleMenu} className={this.state.menuOpen ? 'rotate-hamburguer hamburguer-open' : ''}></span>
           <ul className="menu">
+          <Link to="/"><li>Home</li></Link>
           <Link to="/feed"><li>Feed</li></Link>
           <Link to="/cadastro"><li>Cadastrar Serviço</li></Link>
             <li>Mensagens</li>

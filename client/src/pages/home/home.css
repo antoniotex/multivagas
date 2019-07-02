@@ -1,6 +1,79 @@
 .home{
-  /* border: 2px solid red; */
   margin-top: 68px;
+}
+.home-page{
+  /* border: 2px solid red; */
+  display: flex;
+  flex-direction: column;
+}
+.home-search{
+  border: 2px solid violet;
+  display: flex;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 50px;
+  margin: 10px auto;
+}
+.home-search input{
+  height: 100%;
+  padding: 0;
+  margin: 20px 0;
+  border: none;
+  width: 85%;
+  border-radius: 10px 0 0 10px;
+  font-size: 1.3em;
+  padding-left: 10px;
+  letter-spacing: 1px;
+}
+input::placeholder{
+  /* padding-left: 10px; */
+}
+.home-search button{
+  height: 100%;
+  background: #fff;
+  border: none;
+  border-radius: 0 10px 10px 0;
+
+}
+.home-search a{
+  height: 100%;
+  width: 15%;
+  background: #fff;
+  border: none;
+  border-radius: 0 10px 10px 0;
+}
+.home-search a img{
+  height: 100%;
+  width: 100%;
+}
+.home-mapa{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.home-mapa img{
+  width: 95%;
+}
+.home-feed-button{
+  display: flex;
+  justify-content: center;
+}
+.home-feed-button button{
+  width: 80%;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  font-size: 1.3em;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
   background: cornflowerblue;
-  height: 100vh;;
+  color: #fff;
+  white-space: nowrap;
 }

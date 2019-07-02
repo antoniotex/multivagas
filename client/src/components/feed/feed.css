@@ -32,8 +32,12 @@ section.feed{
   object-fit: cover;
   border-radius: 15px 0 0 15px;
 }
+a{
+  text-decoration: none !important;
+}
 .feed-info span{
   font-weight: bold;
+  text-decoration: none;
 }
 .feed-info p:last-child{
   color: #999;
