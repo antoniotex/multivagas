@@ -8,10 +8,12 @@ class Feed extends Component {
   state = {
     anuncios: [],
     menuOpen: false,
-    imagens: ''
+    imagens: '',
+    loading: false
   };
 
   componentDidMount(){
+    this.setState({ loading: true })
     const termo = this.props.location.pathname.slice(6)
     if(termo){
       const busca = {
@@ -25,7 +27,7 @@ class Feed extends Component {
           item.dadosIMG = base64Flag + imageStr
           return item
         })
-        await this.setState({ anuncios: result.data })
+        await this.setState({ anuncios: result.data, loading: false })
         return result.data
       })
       return
@@ -38,7 +40,7 @@ class Feed extends Component {
           item.dadosIMG = base64Flag + imageStr
           return item
         })
-        await this.setState({ anuncios: result.data })
+        await this.setState({ anuncios: result.data, loading: false })
         return result.data
       })
     }
@@ -58,16 +60,17 @@ class Feed extends Component {
   }
 
   render() {
+    const { loading, anuncios } = this.state
     const termo = this.props.location.pathname.slice(6)
-    if(this.state.anuncios.length > 0){
+    if(!loading){
       return (
         <section className="feed">
 
           <h1>Feed de Anúncios</h1>
           <Link to="/"><p>Voltar para Home</p></Link>
           { termo ? <p>{`Aqui está sua pesquisa para '${termo}' `}</p> : '' }
-          {
-            this.state.anuncios.map((item, index) => {
+          { anuncios.length > 0 ? '' : 'Não encontramos resultados para sua pesquisa, tente outro termo' }
+          { anuncios.length > 0 && this.state.anuncios.map((item, index) => {
             return (
               <Link key={index} to={ `/anuncio/${item.id}` }>
                 <div className="feed-anuncio">
