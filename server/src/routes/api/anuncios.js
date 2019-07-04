@@ -107,9 +107,9 @@ router.post('/', upload.single('imageData'), function(req, res){
   novoItem.dadosIMG.data = fs.readFileSync(req.file.path)
   novoItem.dadosIMG.contentType = req.file.mimetype
   console.log('novoItem', novoItem)
-  // novoItem.save().then(function(item){
-  //   res.json(item)
-  // })
+  novoItem.save().then(function(item){
+    res.json(item)
+  })
 })
 
 router.put('/:id', (req, res) => {

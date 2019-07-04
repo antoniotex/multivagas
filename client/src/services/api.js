@@ -2,8 +2,8 @@ import axios from "axios";
 import { getToken } from "./auth";
 
 const api = axios.create({
-  // baseURL: "https://easy-uerj.herokuapp.com"
-  baseURL: "http://localhost:5000"
+  baseURL: "https://easy-uerj.herokuapp.com"
+  // baseURL: "http://localhost:5000"
 });
 
 api.interceptors.request.use(async config => {
