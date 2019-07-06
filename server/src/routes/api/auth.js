@@ -48,6 +48,20 @@ router.post('/authenticate', async (req, res) => {
   res.send({ usuario, token: gerarToken({ id: usuario._id })})
 })
 
+// Rota de "Esqueci minha senha"
+router.post('forgot_password', async () => {
+  const { email } = req.body
+
+  try{
+    const user = await Usuario.findOne({ email })
+    if(!user){ return res.status(400).send({ erro: 'Usuário não encontrado' }) }
+
+  }
+  catch(erro){
+    res.status(400).send({ erro: 'Falha ao recuperar senha, tente novamente'})
+  }
+})
+
 // Toda vez que for requisitado /auth, esse rota aqui será chamada
 module.exports = app => app.use('/auth', router)
 
