@@ -23,7 +23,7 @@ class SignIn extends Component {
     } else {
       try {
         const response = await api.post("/auth/authenticate", { email, senha })
-        login(response.data.token, response.data.usuario.nome);
+        login(response.data.token, response.data.usuario.nome, response.data.usuario.id);
         this.props.history.push("/");
       } catch (err) {
         this.setState({
@@ -46,6 +46,7 @@ class SignIn extends Component {
           <button type="submit">Entrar</button>
           {this.state.error && <p>{this.state.error}</p>}
           <Link to="/signup">Criar conta grátis</Link>
+          <Link to="/">Esqueceu sua senha?</Link>
         </form>
       </section>
     );

@@ -2,6 +2,7 @@ const express = require('express')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
+const uuid = require('uuid')
 const Usuario = require('../../models/usuario')
 const authConfig = require('../../config/auth.json')
 const mailer = require('../../modules/mailer')
@@ -15,12 +16,17 @@ function gerarToken(params = {}){
 }
 
 router.post('/registro', async(req, res) => {
-  const { email } = req.body
-  console.log(req.body)
+  req.body.id = uuid()
+  const { email, id } = req.body
   try{
     if(await Usuario.findOne({ email })){
-      return res.status(400).send({erro: `Já existe um usuário com o e-mail ${ email }`})
+      return res.status(400).send({ erro: `Já existe um usuário com o e-mail ${ email }` })
     }
+
+    if(await Usuario.findOne({ id })){
+      return res.status(400).send({ erro: `Ocorreu um problema de ID, envie seu cadastro novamente` })
+    }
+
     const usuario = await Usuario.create(req.body)
 
     usuario.senha = undefined
@@ -28,7 +34,6 @@ router.post('/registro', async(req, res) => {
     return res.send({ usuario, token: gerarToken({ id: usuario._id }) })
   }
   catch(erro){
-    console.log(erro)
     return res.status(400).send({erro: 'Falha no registro'})
   }
 })

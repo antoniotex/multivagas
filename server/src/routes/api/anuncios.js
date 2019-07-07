@@ -1,6 +1,5 @@
 
 const express = require('express')
-const path = require('path')
 const multer = require('multer')
 const uuid = require('uuid')
 const crypto = require('crypto')
@@ -88,25 +87,13 @@ router.get('/busca', (req, res) => {
 })
 
 router.post('/', upload.single('imageData'), function(req, res){
-  // if (!req.file) return res.send('Please upload a file')
-  // console.log('req.file', req.file)
-  console.log(req.body)
-  console.log(req.file);
+  const { idUsuario, nomeUsuario, titulo, descricao, categoria, telefone, cep, cidade, bairro } = req.body
+  const id = crypto.randomBytes(3).toString('hex')
   const novoItem = new Anuncios({
-    idUsuario: uuid(),
-    nomeUsuario: req.body.nomeUsuario,
-    id: crypto.randomBytes(3).toString('hex'),
-    titulo: req.body.titulo,
-    descricao: req.body.descricao,
-    categoria: req.body.categoria,
-    telefone: req.body.telefone,
-    cep: req.body.cep,
-    cidade: req.body.cidade,
-    bairro: req.body.bairro
+    idUsuario, nomeUsuario, id, titulo, descricao, categoria, telefone, cep, cidade, bairro
   })
   novoItem.dadosIMG.data = fs.readFileSync(req.file.path)
   novoItem.dadosIMG.contentType = req.file.mimetype
-  console.log('novoItem', novoItem)
   novoItem.save().then(function(item){
     res.json(item)
   })
