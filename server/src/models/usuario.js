@@ -19,6 +19,14 @@ const UsuarioSchema = new Schema({
     required: true,
     select: false
   },
+  resetSenhaToken: {
+    tyoe: String,
+    select: false,
+  },
+  resetSenhaExp: {
+    type: Date,
+    select: false
+  },
   dataCriacao: {
       type: Date,
       default: Date.now

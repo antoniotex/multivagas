@@ -1,8 +1,10 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
 const Usuario = require('../../models/usuario')
 const authConfig = require('../../config/auth.json')
+const mailer = require('../../modules/mailer')
 
 const router = express.Router()
 
@@ -49,16 +51,77 @@ router.post('/authenticate', async (req, res) => {
 })
 
 // Rota de "Esqueci minha senha"
-router.post('forgot_password', async () => {
+router.post('/forgot_password', async (req, res) => {
   const { email } = req.body
 
   try{
-    const user = await Usuario.findOne({ email })
-    if(!user){ return res.status(400).send({ erro: 'Usuário não encontrado' }) }
+    const usuario = await Usuario.findOne({ email })
+    if(!usuario){ return res.status(400).send({ erro: 'Usuário não encontrado' }) }
 
+    const token = crypto.randomBytes(20).toString('hex')
+    const now = new Date()
+    now.setHours(now.getHours() + 1)
+    console.log('cheguei aqui', usuario);
+
+    // await Usuario.updateOne(usuario._id, {
+    //   '$set': {
+    //     resetSenhaToken: token,
+    //     resetSenhaExp: now
+    //   }
+    // })  
+
+    Anuncios.updateOne({id: usuario._id}, { resetSenhaToken: token, resetSenhaExp: now }, {new: true}, (err, item) => {
+      if(err){
+        res.send(err)
+      }
+    })
+
+    mailer.sendMail({
+      to: email,
+      from: 'acm.skt@gmail.com',
+      template: 'forgot_password',
+      context: { token },
+    }, (erro) => {
+      console.log(erro)
+      if(erro){ res.status(400).send({ erro: 'Não foi possível enviar e-mail de alteração de senha' }) }
+
+      return res.send({ msg: 'O e-mail com o o token foi enviado' })
+    })
   }
   catch(erro){
+    console.log(erro)
     res.status(400).send({ erro: 'Falha ao recuperar senha, tente novamente'})
+  }
+})
+
+router.post('/reset_password', async (req, res) => {
+  const { email, senha } = req.body
+
+  try{
+    const usuario = await Usuario.findOne({ email })
+      .select('resetSenhaToken resetSenhaExp')
+
+    console.log(usuario);
+
+    if(!usuario){ return res.status(400).send({ erro: 'Usuário não encontrado' }) }
+
+    const senhaToken = JSON.stringify(usuario.resetSenhaToken)
+    const token = JSON.stringify(req.body.token)
+    if(token !== senhaToken){ return res.status(400).send({ erro: 'Token invalido, gere outro' }) }
+
+    const now = new Date()
+    if(now > usuario.resetSenhaExp){ return res.status(400).send({ erro: 'Token expirado, gere um novo token' }) }
+
+    usuario.senha = senha
+
+    usuario.save()
+
+    res.send()
+
+
+  }catch(erro){
+    console.log(erro)
+    res.status(400).send({ erro: 'Não pude resetar sua senha' })
   }
 })
 
