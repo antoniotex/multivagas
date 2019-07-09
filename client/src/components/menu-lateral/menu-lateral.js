@@ -23,10 +23,7 @@ class MenuLateral extends Component {
           <Link to="/"><li>Home</li></Link>
           <Link to="/feed"><li>Feed</li></Link>
           <Link to="/cadastro"><li>Cadastrar Serviço</li></Link>
-            <li>Mensagens</li>
-            <li>Sobre o Aplicativo</li>
-            <li>FAQ</li>
-            <Link to="/" onClick={ logout }><li>Sair</li></Link>
+          <Link to="/" onClick={ logout }><li>Sair</li></Link>
           </ul>
         </div>
       </section>

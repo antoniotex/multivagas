@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import api from '../../services/api'
 import './feed.css'
 import loadingImg from '../../assets/gear.svg'
+import axios from 'axios'
 
 class Feed extends Component {
   state = {
@@ -13,13 +14,14 @@ class Feed extends Component {
   };
 
   componentDidMount(){
+    console.log('oi');
     this.setState({ loading: true })
     const termo = this.props.location.pathname.slice(6)
     if(termo){
       const busca = {
         termo: termo
       }
-      api.get('/api/anuncios/busca', { params: busca })
+      axios.get('/api/anuncios/busca', { params: busca })
       .then(async result => {
         await result.data.map(item => {
           const base64Flag = `data:${item.dadosIMG.contentType};base64,`

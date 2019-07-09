@@ -8,7 +8,7 @@ const authMiddleware = require('../../middlewares/auth')
 
 const router = express.Router()
 
-router.use(authMiddleware)
+// router.use(authMiddleware)
 
 const Anuncios = require('../../models/anuncios')
 
@@ -86,7 +86,7 @@ router.get('/busca', (req, res) => {
   })
 })
 
-router.post('/', upload.single('imageData'), function(req, res){
+router.post('/', authMiddleware, upload.single('imageData'), function(req, res){
   const { idUsuario, nomeUsuario, titulo, descricao, categoria, telefone, cep, cidade, bairro } = req.body
   const id = crypto.randomBytes(3).toString('hex')
   const novoItem = new Anuncios({
@@ -99,7 +99,7 @@ router.post('/', upload.single('imageData'), function(req, res){
   })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', authMiddleware, (req, res) => {
   let updateObj = req.body
   Anuncios.updateOne({id: req.params.id}, updateObj, {new: true}, (err, item) => {
       if(err){
@@ -109,7 +109,7 @@ router.put('/:id', (req, res) => {
   })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authMiddleware, (req, res) => {
   Anuncios.findById(req.params.id)
     .then(item => item.remove().then(() => res.json({ success: true })))
     .catch(err => res.status(404).json({ success: false }))
